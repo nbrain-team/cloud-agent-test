@@ -2,9 +2,20 @@
 
 ## Cursor Cloud specific instructions
 
-This is a minimal repository with no application code, dependencies, or services. It contains:
+This is a simple Node.js chat application that proxies messages to the Anthropic Claude API.
 
-- `testfile1.txt` and `test-instructions.txt` — placeholder text files
-- `.github/workflows/cursor-pr-auto-merge.yml` — GitHub Actions workflow that auto-labels and enables squash auto-merge for PRs from `cursor/*` branches
+### Services
 
-There are no build steps, linters, test suites, or runnable services. No dependency installation is required.
+| Service | Command | Port | Notes |
+|---------|---------|------|-------|
+| Chat server | `ANTHROPIC_API_KEY=<key> node server.js` | 3000 | Serves both the API and static frontend |
+
+### Running
+
+The `ANTHROPIC_API_KEY` environment variable must be set before starting the server. The server runs on port 3000 (configurable via `PORT` env var). There is no separate build step — the frontend is plain HTML/CSS/JS served statically.
+
+### Project structure
+
+- `server.js` — Express server with `/api/chat` endpoint
+- `public/index.html` — Chat UI (single-page, no build step)
+- `package.json` — Dependencies: `express`, `@anthropic-ai/sdk`
